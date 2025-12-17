@@ -1,0 +1,18 @@
+{
+  "checkpoint": "mc-med-gpt/ckpt.pt",
+  "training_iteration": 10000,
+  "best_val_loss": 8.068419456481934,
+  "test_batches": 100,
+  "batch_size": 64,
+  "test_samples_approx": 6400,
+  "ce_loss_mean": 3.468583562374115,
+  "ce_loss_std": 0.15355092318603628,
+  "ce_loss_median": 3.470047116279602,
+  "dt_loss_mean": 3.4624459981918334,
+  "dt_loss_std": 0.29919211971029624,
+  "dt_loss_median": 3.459067225456238,
+  "total_loss_mean": 6.931029560565949,
+  "total_loss_std": 0.34829427693242837,
+  "total_loss_median": 6.899267315864563,
+  "perplexity": 32.091254976267074
+}

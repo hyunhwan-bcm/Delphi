@@ -21,12 +21,12 @@ init_from = 'scratch'  # 'scratch' or 'resume' or 'gpt2*'
 seed = 42
 
 # wandb logging
-wandb_log = False  # disabled by default
-wandb_project = 'delphi'
+wandb_log = True  # disabled by default
+wandb_project = 'mcp-med-gpt'
 wandb_run_name = 'run' + str(time.time())
 
 # data
-dataset = 'ukb_data'
+dataset = 'mc-med'
 gradient_accumulation_steps = 1  # used to simulate larger batch sizes
 batch_size = 128  # if gradient_accumulation_steps > 1, this is the micro-batch size
 block_size = 24
@@ -75,8 +75,9 @@ config = {k: globals()[k] for k in config_keys}  # will be useful for logging
 
 os.makedirs(out_dir, exist_ok=True)
 torch.manual_seed(seed)
-torch.backends.cuda.matmul.fp32_precision = 'tf32'
-torch.backends.cudnn.conv.fp32_precision = 'tf32'
+if torch.cuda.is_available():
+    torch.backends.cuda.matmul.allow_tf32 = True
+    torch.backends.cudnn.allow_tf32 = True
 device_type = 'cuda' if 'cuda' in device else 'cpu'  # for later use in torch.autocast
 # note: float16 data type will automatically use a GradScaler
 ptdtype = {'float32': torch.float32, 'float64': torch.float64,

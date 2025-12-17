@@ -1,0 +1,39 @@
+
+import time
+
+out_dir = 'mc-med-gpt'
+eval_interval = 250 # keep frequent because we'll overfit
+eval_iters = 25
+log_interval = 25 # don't print too too often
+seed  = 42
+
+# we expect to overfit on this small dataset, so only save when val improves
+always_save_checkpoint = True
+
+wandb_log = True # override via command line if you like
+wandb_project = 'mc-med-gpt'
+wandb_run_name = 'run' + str(time.time())
+
+dataset = 'mc-med'
+batch_size = 16
+block_size = 48
+data_fraction = 1.0
+
+n_layer = 12
+n_head = 12
+n_embd = 120
+dropout = 0.1
+weight_decay = 2e-1
+vocab_size = 50000
+
+learning_rate = 2e-3 # with baby networks can afford to go a bit higher
+max_iters = 10000
+lr_decay_iters = 10000 # make equal to max_iters usually
+min_lr = 2e-4 # learning_rate / 10 usually
+beta2 = 0.99 # make a bit bigger because number of tokens per iter is small
+
+warmup_iters = 500 # not super necessary potentially
+ignore_tokens = [0, 2 ,3, 4, 5, 6, 7, 8, 9, 10, 11, 12] # ignore padding and lifestyle tokens
+t_min = 0.1
+token_dropout = 0.0
+no_event_token_rate = 5
